@@ -1,26 +1,15 @@
-import type { Component } from "solid-js";
-
 import logo from "./logo.svg";
 import styles from "./App.module.css";
+import { Route, Router } from "@solidjs/router";
+import LoginPage from "./pages/Login/LoginPage";
+import HomePage from "./pages/HomePage/HomePage";
 
-const App: Component = () => {
+const App = (props: any) => {
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Test build
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Route path="" component={LoginPage} />
+      <Route path="/home" component={HomePage} />
+    </Router>
   );
 };
 
