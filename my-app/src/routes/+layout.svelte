@@ -1,55 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Header from './Header.svelte';
+	import { ToastContainer, FlatToast } from 'svelte-toasts';
+
 	import './styles.css';
 </script>
 
-<div class="app">
-	<Header />
-	<h1 class="text-red-500">Hello world!</h1>
-
+<div class="flex min-h-screen flex-col items-center justify-center">
+	<ToastContainer placement="top-right" let:data>
+		<FlatToast {data} />
+		<!-- Provider template for your toasts -->
+	</ToastContainer>
 	<main>
 		<slot />
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>

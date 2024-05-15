@@ -15,6 +15,30 @@
 			src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0&appId=1655946491841486"
 			nonce="MRvdsku0"
 		></script>
+		<script>
+			window.fbAsyncInit = function () {
+				FB.init({
+					appId: '1879934572441815',
+					cookie: false,
+					xfbml: true,
+					version: 'v19.0'
+				});
+
+				FB.AppEvents.logPageView();
+			};
+
+			(function (d, s, id) {
+				var js,
+					fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {
+					return;
+				}
+				js = d.createElement(s);
+				js.id = id;
+				js.src = 'https://connect.facebook.net/en_US/sdk.js';
+				fjs.parentNode.insertBefore(js, fjs);
+			})(document, 'script', 'facebook-jssdk');
+		</script>
 		<div style="display: contents">%sveltekit.body%</div>
 	</body>
 </html>

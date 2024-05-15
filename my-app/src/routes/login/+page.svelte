@@ -1,6 +1,5 @@
 <script lang="ts">
 	import img from '$lib/images/ftns.png';
-	import { browser } from '$app/environment';
 	import userStore from '../../stores/user.store';
 	import { goto } from '$app/navigation';
 

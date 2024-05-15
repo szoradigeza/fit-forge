@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	HTTP HTTPConfig
+	DB   DbConfig
 }
 
 func NewConfig() *Config {
@@ -18,5 +19,6 @@ func NewConfig() *Config {
 
 	return &Config{
 		HTTP: LoadHTTPConfig(),
+		DB:   loadDbConfig(),
 	}
 }
