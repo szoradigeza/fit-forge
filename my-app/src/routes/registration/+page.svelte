@@ -11,7 +11,9 @@
 			});
 		}
 
-		await fetch('http://localhost:4200/api/register', {
+		formData.delete('confirmPassword');
+
+		await fetch('http://localhost:3200/register', {
 			method: 'POST',
 			body: formData
 		});

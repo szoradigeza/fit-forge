@@ -8,6 +8,6 @@ import (
 func ConfigureRoutes(server *server.Server) {
 	authHandler := auth.NewAuthHandler(server)
 
-	server.Echo.GET("/register", authHandler.Register)
+	server.Echo.POST("/register", authHandler.Register)
 	server.Echo.GET("/user", authHandler.GetAll)
 }

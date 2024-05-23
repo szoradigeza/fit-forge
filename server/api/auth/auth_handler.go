@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -19,16 +18,13 @@ func NewAuthHandler(s *s.Server) *AuthHandler {
 }
 
 func (r *AuthHandler) Register(c echo.Context) error {
-	log.Printf("register")
 	userService := user.NewUserService(r.server.DB)
-	log.Printf("ok")
 
 	userService.Register(&models.User{
-		Name:     "test",
-		Email:    "asd",
-		Password: "pass",
+		Name:     c.FormValue("name"),
+		Email:    c.FormValue("email"),
+		Password: c.FormValue("password"),
 	})
-	log.Printf("nok")
 
 	return c.String(200, "Register")
 }
