@@ -15,9 +15,14 @@ func NewUserService(db *gorm.DB) *UserService {
 	return &UserService{DB: db}
 }
 
-func (service *UserService) Register(user *models.User) {
+func (service *UserService) Register(user *models.User) error {
 	fmt.Println(user)
-	service.DB.Create(user)
+	result := service.DB.Create(user)
+
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
 }
 
 func (service *UserService) GetAll() []models.User {

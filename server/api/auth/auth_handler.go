@@ -17,16 +17,23 @@ func NewAuthHandler(s *s.Server) *AuthHandler {
 	return &AuthHandler{server: s}
 }
 
+type Response struct {
+	Message string `json:"message" `
+}
+
 func (r *AuthHandler) Register(c echo.Context) error {
 	userService := user.NewUserService(r.server.DB)
 
-	userService.Register(&models.User{
+	err := userService.Register(&models.User{
 		Name:     c.FormValue("name"),
 		Email:    c.FormValue("email"),
 		Password: c.FormValue("password"),
 	})
+	if err != nil {
+		return c.JSON(406, err)
+	}
 
-	return c.String(200, "Register")
+	return c.JSON(200, &Response{Message: "user created"})
 }
 
 func (r *AuthHandler) GetAll(c echo.Context) error {

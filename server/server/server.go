@@ -19,6 +19,6 @@ func NewServer(cfg *config.Config) *Server {
 	}
 }
 
-func (server *Server) Start(addr string) error {
-	return server.Echo.Start(":" + addr)
+func (server *Server) Start(addr string) {
+	server.Echo.Logger.Fatal(server.Echo.Start(":" + addr))
 }
