@@ -1,22 +1,31 @@
 <script lang="ts">
+	import { redirect } from '@sveltejs/kit';
 	import showToast from '../../shared/showToast';
+	import { goto } from '$app/navigation';
 	const submit = async (e: SubmitEvent) => {
-		const inputs = e.target as HTMLFormElement;
-		const formData = new FormData(inputs);
+		try {
+			const inputs = e.target as HTMLFormElement;
+			const formData = new FormData(inputs);
 
-		if (inputs.confirmPassword.value != inputs.password.value) {
-			showToast({
-				description: "Passwords don't match!",
-				type: 'error'
+			if (inputs.confirmPassword.value != inputs.password.value) {
+				showToast({
+					description: "Passwords don't match!",
+					type: 'error'
+				});
+			}
+
+			formData.delete('confirmPassword');
+
+			const result = await fetch('http://localhost:3200/register', {
+				method: 'POST',
+				body: formData
 			});
+
+			const json = await result.json();
+			goto('/login');
+		} catch (e) {
+			console.error(e);
 		}
-
-		formData.delete('confirmPassword');
-
-		await fetch('http://localhost:3200/register', {
-			method: 'POST',
-			body: formData
-		});
 	};
 </script>
 

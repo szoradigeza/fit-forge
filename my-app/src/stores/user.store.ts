@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 
-const userStore = writable(null);
+const userStore = writable();
 
-export default userStore;
+export { userStore };

@@ -1,6 +1,5 @@
 "use client";
 
-import { atom, useAtom } from "jotai";
 import Image from "next/image";
 import Script from "next/script";
 import { useEffect } from "react";
@@ -21,7 +20,6 @@ export default function Login() {
   }, []);
 
   const login = () => {
-    console.log("asd");
     (window as any).FB.login((response: any) => {
       (window as any).FB.api(
         "/me",
@@ -32,7 +30,6 @@ export default function Login() {
           console.log(JSON.stringify(response));
         },
       );
-      console.log(response);
     });
   };
 

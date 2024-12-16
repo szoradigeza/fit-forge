@@ -31,3 +31,21 @@ func (service *UserService) GetAll() []models.User {
 	service.DB.Find(&users)
 	return users
 }
+
+func (service *UserService) FindUser(email string, password string) (*models.User, error) {
+	var user models.User
+	if password == "" {
+		result := service.DB.Where("email = ?", email).First(&user)
+		if result.Error != nil {
+			return nil, result.Error
+		}
+		return &user, nil
+	}
+	result := service.DB.Where("email = ?", email).Where("password = ?", password).First(&user)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &user, nil
+}

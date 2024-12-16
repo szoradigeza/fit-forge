@@ -16,44 +16,44 @@ const LoginPage = () => {
   };
   return (
     <>
-      <div class="font-[sans-serif] text-[#333]">
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 items-center lg:gap-8 gap-4 h-full">
-          <div class="max-md:order-1 lg:col-span-2 md:h-screen w-full bg-[#000842] md:rounded-tr-xl md:rounded-br-xl lg:p-12 p-8">
+      <div className="font-[sans-serif] text-[#333]">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 items-center lg:gap-8 gap-4 h-full">
+          <div className="max-md:order-1 lg:col-span-2 md:h-screen w-full bg-[#000842] md:rounded-tr-xl md:rounded-br-xl lg:p-12 p-8">
             <img
               src="/src/assets/images/ftns.png"
-              class="lg:w-[70%] w-full h-full object-contain block mx-auto"
+              className="lg:w-[70%] w-full h-full object-contain block mx-auto"
               alt="login-image"
             />
           </div>
-          <div class="w-full p-6">
+          <div className="w-full p-6">
             <form>
-              <div class="mb-12">
-                <h3 class="text-3xl font-extrabold">Sign in</h3>
-                <p class="text-sm mt-4 ">
+              <div className="mb-12">
+                <h3 className="text-3xl font-extrabold">Sign in</h3>
+                <p className="text-sm mt-4 ">
                   Don't have an account{" "}
                   <a
                     href="javascript:void(0);"
-                    class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
+                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
                   >
                     Register here
                   </a>
                 </p>
               </div>
               <div>
-                <label class="text-xs block mb-2">Email</label>
-                <div class="relative flex items-center">
+                <label className="text-xs block mb-2">Email</label>
+                <div className="relative flex items-center">
                   <input
                     name="email"
                     type="text"
                     required
-                    class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
+                    className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                     placeholder="Enter email"
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="#bbb"
                     stroke="#bbb"
-                    class="w-[18px] h-[18px] absolute right-2"
+                    className="w-[18px] h-[18px] absolute right-2"
                     viewBox="0 0 682.667 682.667"
                   >
                     <defs>
@@ -83,21 +83,21 @@ const LoginPage = () => {
                   </svg>
                 </div>
               </div>
-              <div class="mt-8">
-                <label class="text-xs block mb-2">Password</label>
-                <div class="relative flex items-center">
+              <div className="mt-8">
+                <label className="text-xs block mb-2">Password</label>
+                <div className="relative flex items-center">
                   <input
                     name="password"
                     type="password"
                     required
-                    class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
+                    className="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                     placeholder="Enter password"
                   />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="#bbb"
                     stroke="#bbb"
-                    class="w-[18px] h-[18px] absolute right-2 cursor-pointer"
+                    className="w-[18px] h-[18px] absolute right-2 cursor-pointer"
                     viewBox="0 0 128 128"
                   >
                     <path
@@ -107,17 +107,17 @@ const LoginPage = () => {
                   </svg>
                 </div>
               </div>
-              <div class="flex items-center justify-between gap-2 mt-5">
+              <div className="flex items-center justify-between gap-2 mt-5">
                 <div>
                   <a
                     href="jajvascript:void(0);"
-                    class="text-blue-600 font-semibold text-sm hover:underline"
+                    className="text-blue-600 font-semibold text-sm hover:underline"
                   >
                     Forgot Password?
                   </a>
                 </div>
               </div>
-              <div class="mt-12">
+              <div className="mt-12">
                 <button
                   onClick={() => {
                     const fb = (window as any).FB;
@@ -127,17 +127,17 @@ const LoginPage = () => {
                     });
                   }}
                   type="button"
-                  class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                  className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
                 >
                   Sign in
                 </button>
               </div>
-              <p class="my-8 text-sm text-gray-400 text-center">
+              <p className="my-8 text-sm text-gray-400 text-center">
                 or continue with
               </p>
-              <div class="space-x-8 flex justify-center">
+              <div className="space-x-8 flex justify-center">
                 <div
-                  class="fb-login-button"
+                  className="fb-login-button"
                   data-width=""
                   data-size="medium"
                   data-button-type=""

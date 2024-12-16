@@ -1,19 +1,67 @@
 <script lang="ts">
+	interface FormData {
+		ok?: boolean;
+		error?: string;
+		token: string;
+	}
 	import img from '$lib/images/ftns.png';
-	import userStore from '../../stores/user.store';
+	import { userStore } from '../../stores/user.store';
 	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
+	import showToast from '../../shared/showToast';
+	import { object, string } from 'yup';
+	import { PUBLIC_API_URL } from '$env/static/public';
 
-	const login = () => {
-		(window as any).FB.login((response: any) => {
-			(window as any).FB.api('/me', { fields: 'name, email' }, function (response: any) {
-				// TODO: update to redirect
+	let facebookLoggedIn = false;
+	let email: undefined | string = undefined;
+	$: facebookLoggedIn && login(email, '', true);
 
-				console.log(JSON.stringify(response));
-				userStore.set(response);
-
-				goto('/home');
+	const login = async (email?: string, password?: string, isFacebook?: boolean) => {
+		if (!email || !password) {
+			showToast({
+				description: 'Email or password is missing!',
+				type: 'error'
 			});
-			console.log(response);
+		}
+
+		try {
+			const resp = await fetch(`${PUBLIC_API_URL}/login`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email,
+					password,
+					isFacebook
+				})
+			});
+			const respData = await resp.json();
+
+			if (!resp.ok) {
+				console.error(respData);
+				showToast({
+					description: respData.message,
+					type: 'error'
+				});
+				return;
+			}
+
+			goto('/home');
+		} catch (e) {
+			console.error(e);
+		}
+	};
+
+	const loginWithFacebook = async () => {
+		const wind = window as any;
+		wind.FB.login((response: any) => {
+			wind.FB.api('/me', { fields: 'name, email' }, function (response: any) {
+				console.log(response);
+				userStore.set(response);
+				email = response.email;
+				facebookLoggedIn = true;
+			});
 		});
 	};
 </script>
@@ -26,7 +74,12 @@
 			<img src={img} class="lg:w-[70%] w-full h-full object-contain block mx-auto" alt="loginImg" />
 		</div>
 		<div class="w-full p-6">
-			<form>
+			<form
+				method="POST"
+				on:submit|preventDefault={(event) => {
+					login(event.currentTarget['email'].value, event.currentTarget['password'].value);
+				}}
+			>
 				<div class="mb-12">
 					<h3 class="text-3xl font-extrabold">Sign in</h3>
 					<p class="text-sm mt-4">
@@ -114,7 +167,7 @@
 				</div>
 				<div class="mt-12">
 					<button
-						type="button"
+						type="submit"
 						class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
 					>
 						Sign in
@@ -122,7 +175,7 @@
 				</div>
 				<p class="my-8 text-sm text-gray-400 text-center">or continue with</p>
 				<div class="space-x-8 flex justify-center">
-					<button on:click={login} type="button" class="border-none outline-none">
+					<button on:click={loginWithFacebook} type="button" class="border-none outline-none">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="30px"

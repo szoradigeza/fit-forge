@@ -28,7 +28,6 @@ export default function Registration() {
     const json = await result.json();
     console.log(json);
 
-    console.log(formData.get("name"));
     const user = {
       name: formData.get("name"),
     };
